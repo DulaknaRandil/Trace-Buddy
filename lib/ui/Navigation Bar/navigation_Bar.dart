@@ -5,6 +5,7 @@ import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:responsive_navigation_bar/responsive_navigation_bar.dart';
+import 'package:trace_buddy/ui/Home%20Screen/home_screen.dart';
 import 'package:trace_buddy/ui/Profile%20Screen/profile_screen.dart';
 
 class NavigationBarScreen extends StatefulWidget {
@@ -91,7 +92,7 @@ class _NavigationBarScreenState extends State<NavigationBarScreen> {
             ),
           ),
           NavigationBarButton(
-            icon: Iconsax.profile_circle,
+            icon: Iconsax.video_square,
             backgroundGradient: LinearGradient(
               colors: [
                 Color.fromARGB(255, 9, 149, 213),
@@ -109,24 +110,6 @@ class _NavigationBarScreenState extends State<NavigationBarScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        backgroundColor: Color.fromARGB(255, 9, 217, 141),
-      ),
-      body: Center(
-        child: Text(
-          'Home Screen Content',
-          style: TextStyle(fontSize: 24),
-        ),
       ),
     );
   }
