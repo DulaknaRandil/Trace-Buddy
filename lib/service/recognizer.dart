@@ -21,8 +21,8 @@ class Recognizer {
     Tflite.close();
 
     return Tflite.loadModel(
-      model: "assets/mnist.tflite",
-      labels: "assets/mnist.txt",
+      model: "assets/tflite_models/mnist.tflite",
+      labels: "assets/tflite_models/mnist.txt",
     );
   }
 
