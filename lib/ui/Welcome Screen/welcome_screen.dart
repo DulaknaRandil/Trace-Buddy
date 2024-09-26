@@ -13,9 +13,12 @@ class WelcomeScreen extends StatelessWidget {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/images/welcome.png',
+              'assets/images/1ffcf559067459774a9e9ea32838f35a 1.png',
               fit: BoxFit.cover,
             ),
+          ),
+          Container(
+            color: Colors.white.withOpacity(0.8), // Adjust opacity as needed
           ),
           // Main Content
           Center(
@@ -23,20 +26,15 @@ class WelcomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 // Padding to move content upwards
-                SizedBox(height: 350),
+                SizedBox(height: 150),
                 // Explore Beauty of Sri Lanka Text
-                Text(
-                  'Explore Beauty\nof Sri Lanka',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.dmSerifText(
-                    color: Colors.white,
-                    fontSize: 48,
-                    letterSpacing: 1,
-                    height: 1.2,
-                  ),
+                Image.asset(
+                  'assets/images/09736d19e3183b83891293083362bc75 1.png',
+                  fit: BoxFit.cover,
                 ),
 
                 // Buttons Row
+                SizedBox(height: 20),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -49,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(226.36, 45.18),
-                        backgroundColor: Colors.red,
+                        backgroundColor: Colors.lightBlueAccent.shade200,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -73,7 +71,8 @@ class WelcomeScreen extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(226.36, 45.18),
-                        backgroundColor: Colors.orange,
+                        backgroundColor:
+                            const Color.fromARGB(255, 10, 217, 124),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -92,7 +91,7 @@ class WelcomeScreen extends StatelessWidget {
                 // Padding to move content downwards
 
                 Image.asset(
-                  'assets/images/logo-with-name-stroke-1.png',
+                  'assets/images/logo.png',
                   width: 84,
                   height: 84,
                 ),

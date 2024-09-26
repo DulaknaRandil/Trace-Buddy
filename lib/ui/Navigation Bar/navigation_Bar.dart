@@ -43,7 +43,10 @@ class _NavigationBarScreenState extends State<NavigationBarScreen> {
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xFFFFC100), Colors.amber],
+                  colors: [
+                    Color.fromARGB(255, 9, 217, 141),
+                    Color.fromARGB(255, 9, 217, 141)
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -70,27 +73,39 @@ class _NavigationBarScreenState extends State<NavigationBarScreen> {
         ),
         navigationBarButtons: const <NavigationBarButton>[
           NavigationBarButton(
-            icon: Icons.home,
+            icon: Iconsax.receipt_edit,
             backgroundGradient: LinearGradient(
-              colors: [Colors.yellow, Colors.amber],
+              colors: [
+                Color.fromARGB(255, 9, 149, 213),
+                Color.fromARGB(255, 99, 221, 237)
+              ],
             ),
           ),
           NavigationBarButton(
-            icon: EvaIcons.search,
+            icon: Iconsax.task_square4,
             backgroundGradient: LinearGradient(
-              colors: [Colors.yellow, Colors.amber],
+              colors: [
+                Color.fromARGB(255, 9, 149, 213),
+                Color.fromARGB(255, 99, 221, 237)
+              ],
             ),
           ),
           NavigationBarButton(
-            icon: Iconsax.routing,
+            icon: Iconsax.profile_circle,
             backgroundGradient: LinearGradient(
-              colors: [Colors.yellow, Colors.amber],
+              colors: [
+                Color.fromARGB(255, 9, 149, 213),
+                Color.fromARGB(255, 99, 221, 237)
+              ],
             ),
           ),
           NavigationBarButton(
-            icon: EvaIcons.heart,
+            icon: Iconsax.setting_2,
             backgroundGradient: LinearGradient(
-              colors: [Colors.yellow, Colors.amber],
+              colors: [
+                Color.fromARGB(255, 9, 149, 213),
+                Color.fromARGB(255, 99, 221, 237)
+              ],
             ),
           ),
         ],
@@ -105,7 +120,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
-        backgroundColor: Colors.amber,
+        backgroundColor: Color.fromARGB(255, 9, 217, 141),
       ),
       body: Center(
         child: Text(
@@ -123,7 +138,7 @@ class TaskListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Task List'),
-        backgroundColor: Colors.amber,
+        backgroundColor: Color.fromARGB(255, 9, 217, 141),
       ),
       body: Center(
         child: Text(
@@ -141,7 +156,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
-        backgroundColor: Colors.amber,
+        backgroundColor: Color.fromARGB(255, 9, 217, 141),
       ),
       body: Center(
         child: Text(

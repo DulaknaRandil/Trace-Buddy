@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 251, 252, 250),
       body: Container(
         width: double.infinity,
         child: Column(
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Spacer(flex: 5),
             Image.asset(
-              "assets/images/Logo with Name BG.png",
+              "assets/images/logo.png",
               width: 240,
               height: 240,
             ),
@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             SizedBox(height: 5),
             Text(
-              'Team Neon Genesis',
+              'Team GreenBYTE',
               style: GoogleFonts.poppins(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,

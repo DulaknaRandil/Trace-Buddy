@@ -148,7 +148,7 @@ class LoginScreen extends StatelessWidget {
                       context: context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
+                  backgroundColor: Color.fromARGB(255, 9, 217, 141),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -156,7 +156,7 @@ class LoginScreen extends StatelessWidget {
                       horizontal: screenWidth * 0.2, vertical: 12),
                 ),
                 child: Text(
-                  'Log in',
+                  'Login',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,

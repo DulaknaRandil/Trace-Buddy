@@ -134,7 +134,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       height: 45,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red, // background color
+                          backgroundColor: Colors
+                              .lightBlueAccent.shade200, // background color
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),

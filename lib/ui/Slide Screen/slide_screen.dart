@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:trace_buddy/ui/Welcome%20Screen/welcome_screen.dart';
+import 'package:svg_flutter/svg_flutter.dart';
+
+import '../Welcome Screen/welcome_screen.dart';
 
 class SlideScreen extends StatefulWidget {
   @override
@@ -14,24 +15,21 @@ class _SlideScreenState extends State<SlideScreen> {
   int _currentPage = 0;
 
   List<String> images = [
-    "assets/images/c_50_d_919929458_cdb_8673_eb_7_fc_0513409.png",
-    "assets/images/f_4_e_17_b_568_f_5592_f_0_dcf_5_c_9278_d_8_f_5562.png",
-    "assets/images/cdb_88_dbb_8_f_59_c_5_a_651_ea_081_e_97_fa_1.png",
-    "assets/images/splash.png",
+    "assets/images/1ffcf559067459774a9e9ea32838f35a 1.png",
+    "assets/images/6c0f7018436633dff222523e9ff2a937 1.png",
+    "assets/images/3ee9d88611d847eb92ebbd4c53d04d31 1.png",
   ];
 
   List<String> titles = [
-    "AYUBOWAN!",
-    "Discover Sri Lanka’s",
-    "Ascend to",
-    "Escape to Paradise"
+    "Welcome to",
+    "Your personal writing coach, tailored to",
+    "Easily track your completed tasks and"
   ];
 
   List<String> subtitles = [
-    "Welcome to the Perl of the Indian Ocean",
-    "Hidden Gems",
-    "new heights",
-    "   Start Sri Lankan"
+    "TraceBuddy!",
+    "your pace and progress !",
+    "See how far you’ve come !"
   ];
 
   void _onPageChanged(int index) {
@@ -48,7 +46,6 @@ class _SlideScreenState extends State<SlideScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -60,8 +57,7 @@ class _SlideScreenState extends State<SlideScreen> {
             onPageChanged: _onPageChanged,
             itemCount: images.length,
             itemBuilder: (context, index) {
-              // Calculate sizes and positions dynamically
-              double titleFontSize = screenWidth * 0.1;
+              double titleFontSize = screenWidth * 0.075;
               double subtitleFontSize = screenWidth * 0.03;
               double titlePositionBottom = screenHeight * 0.15;
               double titlePositionLeft = screenWidth * 0.05;
@@ -70,53 +66,46 @@ class _SlideScreenState extends State<SlideScreen> {
               TextStyle subtitleStyle;
               MainAxisAlignment columnAlignment = MainAxisAlignment.center;
 
-              // Adjust styles and positions for each slide
               if (index == 0) {
-                titleTextAlign = TextAlign.center;
-                subtitleStyle = GoogleFonts.poppins(
-                  fontSize: subtitleFontSize,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                );
-              } else if (index == 1) {
-                titleFontSize = screenWidth * 0.08;
-                subtitleFontSize = screenWidth * 0.1;
-                titlePositionBottom = screenHeight * 0.10;
-                titlePositionLeft = screenWidth * 0.08;
-                titleTextAlign = TextAlign.left;
-                columnAlignment = MainAxisAlignment.start;
-                subtitleStyle = GoogleFonts.dmSerifText(
-                  fontSize: subtitleFontSize,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                );
-              } else if (index == 2) {
-                titleFontSize = screenWidth * 0.068;
-                subtitleFontSize = screenWidth * 0.07;
-                titlePositionBottom = screenHeight * 0.69;
-                titlePositionLeft = screenWidth * 0.05;
+                // Modifying index 0 to align text at the top-left
+                titlePositionBottom =
+                    screenHeight * 0.70; // Push the text upwards
+                titlePositionLeft =
+                    screenWidth * 0.05; // Align text to the left
                 titlePositionRight = screenWidth * 0.05;
                 titleTextAlign = TextAlign.left;
                 columnAlignment = MainAxisAlignment.start;
-                subtitleStyle = GoogleFonts.dmSerifText(
+
+                subtitleStyle = GoogleFonts.poppins(
                   fontSize: subtitleFontSize,
                   fontWeight: FontWeight.w400,
-                  color: Colors.white,
+                  color: Colors.black,
                 );
-              } else if (index == 3) {
-                titleFontSize = screenWidth * 0.08;
-                subtitleFontSize = screenWidth * 0.08;
-                titlePositionBottom = screenHeight * 0.32;
-                titlePositionLeft = screenWidth * 0.24;
-                titleTextAlign = TextAlign.right;
-                subtitleStyle = GoogleFonts.dmSerifText(
+              } else if (index == 1) {
+                titleFontSize = screenWidth * 0.038;
+                subtitleFontSize = screenWidth * 0.039;
+                titlePositionBottom = screenHeight * 0.10;
+                titlePositionLeft = screenWidth * 0.08;
+                titleTextAlign = TextAlign.center;
+                columnAlignment = MainAxisAlignment.start;
+                subtitleStyle = GoogleFonts.poppins(
+                  fontSize: subtitleFontSize,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                );
+              } else if (index == 2) {
+                titleFontSize = screenWidth * 0.042;
+                subtitleFontSize = screenWidth * 0.042;
+                titlePositionBottom = screenHeight * 0.18;
+                titlePositionLeft = screenWidth * 0.037;
+                titleTextAlign = TextAlign.center;
+                subtitleStyle = GoogleFonts.poppins(
                     fontSize: subtitleFontSize,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                    height: 0.2);
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    height: 1);
               } else {
-                subtitleStyle =
-                    TextStyle(); // Add this line to assign an initial value to subtitleStyle
+                subtitleStyle = TextStyle();
               }
 
               return Stack(
@@ -127,7 +116,11 @@ class _SlideScreenState extends State<SlideScreen> {
                     width: double.infinity,
                     height: double.infinity,
                   ),
-                  if (index != 3)
+                  Container(
+                    color: Colors.white
+                        .withOpacity(0.7), // Adjust opacity as needed
+                  ),
+                  if (index != 2)
                     Positioned(
                       top: screenHeight * 0.1,
                       right: screenWidth * 0.06,
@@ -136,7 +129,7 @@ class _SlideScreenState extends State<SlideScreen> {
                         child: Stack(
                           children: [
                             SvgPicture.asset(
-                              "assets/rectangle-15.svg",
+                              "assets/vectors/rectangle-15.svg",
                               width: screenWidth * 0.12,
                               height: screenHeight * 0.03,
                             ),
@@ -159,86 +152,78 @@ class _SlideScreenState extends State<SlideScreen> {
                       ),
                     ),
                   Positioned(
-                    bottom: titlePositionBottom,
+                    bottom: index == 0
+                        ? screenHeight * 0.70
+                        : titlePositionBottom, // Adjust title position for index 0
                     left: titlePositionLeft,
                     right: titlePositionRight,
                     child: Column(
-                      crossAxisAlignment: (index == 1 || index == 2)
-                          ? CrossAxisAlignment.start
-                          : (index == 3)
-                              ? CrossAxisAlignment.end
-                              : CrossAxisAlignment.center,
+                      crossAxisAlignment: (index == 1)
+                          ? CrossAxisAlignment.center
+                          : (index == 2)
+                              ? CrossAxisAlignment.center
+                              : CrossAxisAlignment
+                                  .start, // Align to start for index 0
                       mainAxisAlignment: columnAlignment,
                       children: [
-                        Text(
-                          titles[index],
-                          style: GoogleFonts.dmSerifText(
-                            fontSize: titleFontSize,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 1,
-                            color: Colors.white,
-                            height: index == 3 ? 2 : 1,
+                        if (index == 0) ...[
+                          Text(
+                            titles[index],
+                            style: GoogleFonts.poppins(
+                              fontSize: titleFontSize,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 0,
+                              color: Colors.black,
+                            ),
+                            textAlign: titleTextAlign,
                           ),
-                          textAlign: titleTextAlign,
-                        ),
-                        if (index != 2)
+                          Text(
+                            subtitles[index],
+                            style: GoogleFonts.poppins(
+                              fontSize: screenWidth * 0.12,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                              letterSpacing: 0,
+                            ),
+                            textAlign: titleTextAlign,
+                          ),
+                        ] else ...[
+                          Text(
+                            titles[index],
+                            style: GoogleFonts.poppins(
+                              fontSize: titleFontSize,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1,
+                              color: Colors.black,
+                            ),
+                            textAlign: titleTextAlign,
+                          ),
                           Text(
                             subtitles[index],
                             style: subtitleStyle,
                             textAlign: titleTextAlign,
                           ),
-                        if (index == 2) SizedBox(height: screenHeight * 0.01),
-                        if (index == 2)
-                          Text(
-                            "new heights",
-                            style: GoogleFonts.dmSerifText(
-                              fontSize: screenWidth * 0.068,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white,
-                            ),
-                            textAlign: titleTextAlign,
-                          ),
-                        if (index == 2)
-                          Text(
-                            "in Sri Lanka",
-                            style: GoogleFonts.dmSerifText(
-                              fontSize: screenWidth * 0.08,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white,
-                            ),
-                          ),
-                        if (index == 3)
-                          Wrap(
-                            verticalDirection: VerticalDirection.down,
-                            crossAxisAlignment: WrapCrossAlignment.end,
-                            children: [
-                              Text(
-                                "Adventure",
-                                style: GoogleFonts.dmSerifText(
-                                  fontSize: screenWidth * 0.08,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                ),
-                                textAlign: titleTextAlign,
-                              ),
-                              SizedBox(
-                                width: screenWidth * 0.02,
-                              ),
-                              Text(
-                                "Today",
-                                style: GoogleFonts.dmSerifText(
-                                  fontSize: screenWidth * 0.09,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                ),
-                                textAlign: titleTextAlign,
-                              ),
-                            ],
-                          ),
+                        ],
                       ],
                     ),
                   ),
-                  if (index == 3)
+                  if (index == 0) // Only show on index 0
+                    Positioned(
+                      bottom: screenHeight * 0.1 + screenHeight * 0.01,
+                      left: 0,
+                      right: 0,
+                      child: Center(
+                        child: Text(
+                          "Personalized Learning Experience",
+                          style: GoogleFonts.poppins(
+                            fontSize: screenWidth * 0.04,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (index == 2)
                     Positioned(
                       bottom: screenHeight * 0.1,
                       left: 0,
@@ -249,7 +234,7 @@ class _SlideScreenState extends State<SlideScreen> {
                             _skipToLogin(context);
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.black,
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(screenWidth * 0.04),
@@ -272,7 +257,7 @@ class _SlideScreenState extends State<SlideScreen> {
                               ),
                               SizedBox(width: screenWidth * 0.01),
                               SvgPicture.asset(
-                                "assets/vector-6.svg",
+                                "assets/vectors/vector-6.svg",
                                 width: screenWidth * 0.02,
                                 height: screenHeight * 0.015,
                               ),
@@ -309,7 +294,9 @@ class _SlideScreenState extends State<SlideScreen> {
       width: _currentPage == index ? screenWidth * 0.05 : screenWidth * 0.02,
       margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.01),
       decoration: BoxDecoration(
-        color: _currentPage == index ? Colors.white : Colors.grey,
+        color: _currentPage == index
+            ? Colors.black
+            : Colors.black.withOpacity(0.6),
         borderRadius: BorderRadius.circular(screenWidth * 0.01),
       ),
     );

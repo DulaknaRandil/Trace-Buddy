@@ -18,8 +18,11 @@ class _SignUpFinishScreenState extends State<SignUpFinishScreen> {
   File? _image;
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _countryController = TextEditingController();
+  String? _role; // Dropdown for role
+  String? _gender; // Radio button for gender
+
+  // List of roles for dropdown
+  List<String> roles = ['Teacher', 'Student', 'Parent'];
 
   Future<void> _pickImage(ImageSource source) async {
     final pickedFile = await ImagePicker().pickImage(source: source);
@@ -49,8 +52,8 @@ class _SignUpFinishScreenState extends State<SignUpFinishScreen> {
       final userModel = UserModel(
         firstName: _firstNameController.text,
         lastName: _lastNameController.text,
-        phoneNumber: _phoneNumberController.text,
-        country: _countryController.text,
+        role: _role!, // Role value from dropdown
+        gender: _gender!, // Gender value from radio buttons
         imageUrl: imageUrl, // Set the imageUrl
       );
 
@@ -68,7 +71,6 @@ class _SignUpFinishScreenState extends State<SignUpFinishScreen> {
           builder: (context) => SignUpStatusScreen(status: 'fail'),
         ),
       );
-      // Handle user not signed in
     }
   }
 
@@ -110,7 +112,7 @@ class _SignUpFinishScreenState extends State<SignUpFinishScreen> {
                         children: [
                           CircleAvatar(
                             radius: 47,
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.lightBlueAccent.shade200,
                             child: CircleAvatar(
                               backgroundColor: Colors.white.withOpacity(0.9),
                               radius: 46,
@@ -136,7 +138,7 @@ class _SignUpFinishScreenState extends State<SignUpFinishScreen> {
                                 padding: EdgeInsets.all(6),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Colors.red,
+                                  color: Colors.lightBlueAccent.shade200,
                                   border:
                                       Border.all(color: Colors.white, width: 2),
                                 ),
@@ -155,16 +157,109 @@ class _SignUpFinishScreenState extends State<SignUpFinishScreen> {
                       SizedBox(height: 16),
                       _buildTextField('Last Name', _lastNameController),
                       SizedBox(height: 16),
-                      _buildTextField('Phone Number', _phoneNumberController),
+
+                      // Dropdown for Role
+                      // Dropdown for Role
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.black),
+                        ),
+                        child: DropdownButtonFormField<String>(
+                          value: _role,
+                          dropdownColor: Colors
+                              .white, // Set the dropdown background color to white
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Role',
+                            hintStyle: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black45,
+                            ),
+                          ),
+                          items: roles.map((String role) {
+                            return DropdownMenuItem<String>(
+                              value: role,
+                              child: Text(role,
+                                  style: TextStyle(color: Colors.black)),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              _role = newValue;
+                            });
+                          },
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Please select a role';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+
                       SizedBox(height: 16),
-                      _buildTextField('Country', _countryController),
+
+                      // Radio buttons for Gender
+                      Padding(
+                        padding: const EdgeInsets.only(right: 275),
+                        child: Text(
+                          'Gender',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: ListTile(
+                              title: const Text('Male',
+                                  style: TextStyle(color: Colors.black)),
+                              leading: Radio<String>(
+                                activeColor: Colors.black,
+                                value: 'Male',
+                                groupValue: _gender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _gender = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: ListTile(
+                              title: const Text('Female',
+                                  style: TextStyle(color: Colors.black)),
+                              leading: Radio<String>(
+                                activeColor: Colors.black,
+                                value: 'Female',
+                                groupValue: _gender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _gender = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
                       SizedBox(height: 32),
                       Container(
                         width: double.infinity,
                         height: 45,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red, // background color
+                            backgroundColor: Colors
+                                .lightBlueAccent.shade200, // background color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -180,7 +275,7 @@ class _SignUpFinishScreenState extends State<SignUpFinishScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 90),
+                      SizedBox(height: 80),
                       Column(
                         children: [
                           GestureDetector(

@@ -20,9 +20,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   File? _image;
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _countryController = TextEditingController();
+
+  String _selectedRole = 'Student'; // Default role
+  String _selectedGender = 'Male'; // Default gender
   String? _existingImageUrl;
+  final List<String> roles = [
+    'Student',
+    'Teacher',
+    'Admin'
+  ]; // Define roles list
 
   @override
   void initState() {
@@ -42,15 +48,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         if (data != null) {
           _firstNameController.text = data['firstName'] ?? '';
           _lastNameController.text = data['lastName'] ?? '';
-          _phoneNumberController.text = data['phoneNumber'] ?? '';
-          _countryController.text = data['country'] ?? '';
+          _selectedRole = data['role'] ?? 'Student'; // Load existing role
+          _selectedGender = data['gender'] ?? 'Male'; // Load existing gender
           _existingImageUrl = data['imageUrl'];
         }
         setState(() {
           _firstNameController.text = data!['firstName'] ?? '';
           _lastNameController.text = data['lastName'] ?? '';
-          _phoneNumberController.text = data['phoneNumber'] ?? '';
-          _countryController.text = data['country'] ?? '';
+          _selectedRole = data['role'] ?? 'Student';
+          _selectedGender = data['gender'] ?? 'Male';
           _existingImageUrl = data['imageUrl'];
         });
         await Future.delayed(Duration(seconds: 1));
@@ -89,8 +95,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         final userModel = UserModel(
           firstName: _firstNameController.text,
           lastName: _lastNameController.text,
-          phoneNumber: _phoneNumberController.text,
-          country: _countryController.text,
+          role: _selectedRole, // Updated
+          gender: _selectedGender, // Updated
           imageUrl: imageUrl, // Update the imageUrl if changed
         );
 
@@ -140,7 +146,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: Color.fromARGB(255, 9, 217, 141),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
@@ -150,7 +156,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               children: [
                 // Amber background container
                 Container(
-                  color: Colors.amber,
+                  color: Color.fromARGB(255, 9, 217, 141),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Row(
@@ -194,7 +200,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Icon(Icons.camera_alt,
-                              color: Colors.red.shade400),
+                              color: Colors.lightBlueAccent.shade200),
                         ),
                       ),
                     ),
@@ -211,21 +217,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       SizedBox(height: 16),
                       _buildLabelAndTextField('Last Name', _lastNameController),
                       SizedBox(height: 16),
-                      _buildLabelAndTextField(
-                          'Phone Number', _phoneNumberController),
+                      _buildRoleDropdown(), // Role selection dropdown
                       SizedBox(height: 16),
-                      _buildLabelAndTextField('Country', _countryController),
+                      _buildGenderRadioButtons(), // Gender selection radio buttons
                       SizedBox(height: 30),
                       Center(
                         child: ElevatedButton(
-                          onPressed:
-                              _submitData, // Save the updated data when pressed
+                          onPressed: _submitData,
                           child: Text(
                             'Update',
                             style: TextStyle(color: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.lightBlueAccent.shade200,
                             padding: EdgeInsets.symmetric(horizontal: 40),
                             textStyle: GoogleFonts.poppins(
                               fontSize: 16,
@@ -235,7 +239,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 100),
+                      SizedBox(height: 122),
                     ],
                   ),
                 ),
@@ -280,6 +284,127 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               borderSide: BorderSide(color: Colors.grey),
             ),
           ),
+        ),
+      ],
+    );
+  }
+
+  // Widget to build role selection dropdown
+  Widget _buildRoleDropdown() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Role',
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey[800],
+          ),
+        ),
+        SizedBox(height: 4),
+        // Dropdown for Role
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.black),
+          ),
+          child: DropdownButtonFormField<String>(
+            value: _selectedRole,
+            dropdownColor:
+                Colors.white, // Set the dropdown background color to white
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: 'Role',
+              hintStyle: GoogleFonts.poppins(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Colors.black45,
+              ),
+            ),
+            items: roles.map((String role) {
+              return DropdownMenuItem<String>(
+                value: role,
+                child: Text(role, style: TextStyle(color: Colors.black)),
+              );
+            }).toList(),
+            onChanged: (newValue) {
+              setState(() {
+                _selectedRole = newValue!;
+              });
+            },
+            validator: (value) {
+              if (value == null) {
+                return 'Please select a role';
+              }
+              return null;
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Widget to build gender selection radio buttons
+  Widget _buildGenderRadioButtons() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Gender',
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey[800],
+          ),
+        ),
+        SizedBox(height: 4),
+        Row(
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  Radio<String>(
+                    activeColor: Colors.black,
+                    value: 'Male',
+                    groupValue: _selectedGender,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _selectedGender = value!;
+                      });
+                    },
+                  ),
+                  Text(
+                    'Male',
+                    style:
+                        GoogleFonts.poppins(fontSize: 16, color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Radio<String>(
+                    activeColor: Colors.black,
+                    value: 'Female',
+                    groupValue: _selectedGender,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _selectedGender = value!;
+                      });
+                    },
+                  ),
+                  Text(
+                    'Female',
+                    style:
+                        GoogleFonts.poppins(fontSize: 16, color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ],
     );

@@ -50,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    color: Colors.amber,
+                    color: Color.fromARGB(255, 9, 217, 141),
                     child: SafeArea(
                       child: Column(
                         children: [
@@ -160,7 +160,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
-          color: Color(0xFFFFE0B2),
+          color: Color.fromARGB(255, 115, 234, 190),
           borderRadius: BorderRadius.circular(6),
         ),
         child: Row(
@@ -195,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
-          color: Colors.red,
+          color: Colors.lightBlueAccent.shade200,
           borderRadius: BorderRadius.circular(25),
         ),
         child: Center(
